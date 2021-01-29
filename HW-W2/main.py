@@ -15,9 +15,9 @@ class Die:
     
     def roll(self):
         x =0
-        x = random.randint(0,6)
+        x = random.randint(1,6)
         print('first roll = ' , x)
-        y= random.randint(0,6)
+        y= random.randint(1,6)
         print('second roll = ' , y)
         return x+y
 
@@ -30,8 +30,8 @@ class board:
     
 
 class MGAME:
-
-    number_of_player = 2
+    rounds = 20
+    number_of_player = 5
     p1 = Player("Player_1",0,0)
     p2 = Player("Player_2",0,0)
     p3 = Player("Player_3",0,0)
@@ -42,31 +42,36 @@ class MGAME:
     p8 = Player("Player_8",0,0)
     max_player=[p1,p2,p3,p4,p5,p6,p7,p8]
     Players = []
-    turn = 0
     die = Die()
     board = board()
 
     for i in range(number_of_player):
+
         Players.append(max_player[i])
     
+    
+    print("GAME START")
+    for i in range(rounds):
+        for j in range(len(Players)):
+            print(Players[j].name," current price = ",Players[j].price)
+            print(Players[j].name,"Turn",j,"type D for die")
+                       
+            x = input() 
+            dies = die.roll()
+            Players[j].price = Players[j].price + dies
+            print(Players[j].name," got ",dies)
+            print(Players[j].name," new price = ",Players[j].price)
 
-    def __init__(self):
-        print("GAME START")
-        print(Players)
-        
+            if Players[j].price > 40 :
+                break
 
-
+            
+        if Players[j].price > 40 :
+            print(Players[j].name," WIN ")
+            break
+                
 
 
 game = MGAME()
 
-#p1 = Player("Tong",0,0)
-#p2 = Player("parin",0,0)
-#ply = [p1,p2]
 
-#print(ply[0].name,ply[0].taketurn)
-#print(ply[1].name,ply[1].taketurn)
-#r1 = Die()
-#print(r1.roll())
-#b = board()
-#print(b.square)
