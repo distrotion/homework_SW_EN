@@ -32,14 +32,14 @@ class board:
 class MGAME:
     rounds = 20
     number_of_player = 5
-    p1 = Player("Player_1",0,0)
-    p2 = Player("Player_2",0,0)
-    p3 = Player("Player_3",0,0)
-    p4 = Player("Player_4",0,0)
-    p5 = Player("Player_5",0,0)
-    p6 = Player("Player_6",0,0)
-    p7 = Player("Player_7",0,0)
-    p8 = Player("Player_8",0,0)
+    p1 = Player("Player_1",1,0)
+    p2 = Player("Player_2",1,0)
+    p3 = Player("Player_3",1,0)
+    p4 = Player("Player_4",1,0)
+    p5 = Player("Player_5",1,0)
+    p6 = Player("Player_6",1,0)
+    p7 = Player("Player_7",1,0)
+    p8 = Player("Player_8",1,0)
     max_player=[p1,p2,p3,p4,p5,p6,p7,p8]
     Players = []
     die = Die()
@@ -54,20 +54,21 @@ class MGAME:
     for i in range(rounds):
         for j in range(len(Players)):
             print(Players[j].name," current price = ",Players[j].price)
-            print(Players[j].name,"Turn",j,"type D for die")
+            print(Players[j].name,"Turn : ",Players[j].taketurn,"type D for die")
                        
             x = input() 
             dies = die.roll()
             Players[j].price = Players[j].price + dies
+            Players[j].taketurn = Players[j].taketurn+1
             print(Players[j].name," got ",dies)
             print(Players[j].name," new price = ",Players[j].price)
 
-            if Players[j].price > 40 :
+            if Players[j].price >= 40 :
                 break
 
             
-        if Players[j].price > 40 :
-            print(Players[j].name," WIN ")
+        if Players[j].price >= 40 :
+            print(Players[j].name," WIN AT TURN :" , Players[j].taketurn)
             break
                 
 
